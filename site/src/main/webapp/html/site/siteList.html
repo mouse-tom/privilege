@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>站点列表</title>
+<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.4.1/themes/bootstrap/easyui.css" />
+<link rel="stylesheet" type="text/css" href="../../js/jquery-easyui-1.4.1/themes/icon.css" />
+
+
+<script type="text/javascript" src="../../js/jquery-easyui-1.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-easyui-1.4.1/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+	<table class="easyui-datagrid" id="" title="站点列表" data-options="singleSelect:false,collapsible:true,pagination:true,url:'/item/param/list',method:'get',pageSize:30" >
+		<thead>
+        <tr>
+        	<th data-options="field:'ck',checkbox:true"></th>
+        	<th data-options="field:'id',width:60">ID</th>
+        	<th data-options="field:'itemCatId',width:80">站点编码</th>
+        	<th data-options="field:'itemCatId',width:80">站点名称</th>
+        	 <th data-options="field:'paramData',width:300">站点图标</th>
+        	<th data-options="field:'itemCatName',width:100">站点类别</th>
+            <th data-options="field:'paramData',width:300">站点标签</th>
+            <th data-options="field:'paramData',width:300">站点状态</th>
+            <th data-options="field:'created',width:130,align:'center'">创建日期</th>
+            <th data-options="field:'updated',width:130,align:'center'">更新日期</th>
+        </tr>
+    </thead>
+	</table>
+</body>
+</html>
