@@ -22,13 +22,33 @@ public class SiteController {
 	private SiteService siteService;
 	
 	@ResponseBody
-	@RequestMapping(value="/index.do")
+	@RequestMapping(value="/index.html")
 	public String siteList(Integer page,Integer rows){
+		page = page==null?1:page;
+		rows = rows==null?10:rows;
 		Map hashMap = new HashMap<>();
 		hashMap.put("page", page);
-		hashMap.put("rows", 1);
+		hashMap.put("rows", rows);
 		List<Site> siteList = siteService.siteList(hashMap);
 		return JsonUtils.toJSONString(siteList);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/delSite.html")
+	public String siteDel(String ids){
+		Map hashMap = new HashMap<>();
+		if(ids == null && "".equals(ids)){
+			hashMap.put("msg", "请选中一条数据");
+			hashMap.put("success","false");
+		}else{
+			String[] strArr = ids.split(",");
+			for (int i = 0; i < strArr.length; i++) {
+				siteService.delSite(strArr[i]);
+			}
+			hashMap.put("msg", "删除成功");
+			hashMap.put("success","true");
+		}
+		return JsonUtils.toJSONString(hashMap);
 	}
 	
 }

@@ -9,4 +9,6 @@ public interface SiteService {
 	
 	public List<Site> siteList(Map hashMap);
 	
+	public Integer delSite(String id);
+	
 }

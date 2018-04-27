@@ -26,5 +26,10 @@ public class SiteServiceImpl implements SiteService{
 		PageInfo<Site> pageInfo = new PageInfo<>(siteList);
 		return siteList;
 	}
+
+	@Override
+	public Integer delSite(String id) {
+		return siteDao.deleteByPrimaryKey(id);
+	}
 	
 }
