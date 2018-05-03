@@ -31,5 +31,10 @@ public class SiteServiceImpl implements SiteService{
 	public Integer delSite(String id) {
 		return siteDao.deleteByPrimaryKey(id);
 	}
+
+	@Override
+	public Integer addSite(Site site) {
+		return siteDao.insertSelective(site);
+	}
 	
 }

@@ -1,10 +1,13 @@
 package com.mouse.site.web;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +25,16 @@ public class SiteController {
 	private SiteService siteService;
 	
 	@ResponseBody
-	@RequestMapping(value="/index.html")
-	public String siteList(Integer page,Integer rows){
+	@RequestMapping(value="/listSite.html")
+	public String siteList(Integer page,Integer rows,HttpServletResponse response){
+		response.setHeader("Access-Control-Allow-Origin", "*");  
 		page = page==null?1:page;
 		rows = rows==null?10:rows;
 		Map hashMap = new HashMap<>();
 		hashMap.put("page", page);
 		hashMap.put("rows", rows);
 		List<Site> siteList = siteService.siteList(hashMap);
+		response.setContentType("application/json");
 		return JsonUtils.toJSONString(siteList);
 	}
 	
@@ -46,8 +51,20 @@ public class SiteController {
 				siteService.delSite(strArr[i]);
 			}
 			hashMap.put("msg", "删除成功");
-			hashMap.put("success","true");
+			hashMap.put("success",true);
 		}
+		return JsonUtils.toJSONString(hashMap);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/addSite.html")
+	public String siteAdd(Site site){
+		Map hashMap = new HashMap<>();
+		site.setCreatTime(new Date());
+	
+		Integer flag = siteService.addSite(site);
+		if(flag == 1) hashMap.put("msg", "添加成功");
+		else hashMap.put("msg", "添加失败");
 		return JsonUtils.toJSONString(hashMap);
 	}
 	

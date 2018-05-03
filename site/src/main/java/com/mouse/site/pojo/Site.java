@@ -15,9 +15,9 @@ public class Site {
 
     private String className;
 
-    private Byte siteStatus;
+    private Integer siteStatus;
 
-    private Byte status;
+    private Integer status;
 
     private String remarks;
 
@@ -77,23 +77,23 @@ public class Site {
         this.className = className == null ? null : className.trim();
     }
 
-    public Byte getSiteStatus() {
-        return siteStatus;
-    }
+    public Integer getSiteStatus() {
+		return siteStatus;
+	}
 
-    public void setSiteStatus(Byte siteStatus) {
-        this.siteStatus = siteStatus;
-    }
+	public void setSiteStatus(Integer siteStatus) {
+		this.siteStatus = siteStatus;
+	}
 
-    public Byte getStatus() {
-        return status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public void setStatus(Byte status) {
-        this.status = status;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public String getRemarks() {
+	public String getRemarks() {
         return remarks;
     }
 

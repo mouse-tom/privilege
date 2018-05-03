@@ -56,13 +56,14 @@
 	</div>
 	
 	
-	<div id="win" class="easyui-window" closed="true"  modal="true" title="新建" style="width:300px;height:180px;">
-		<form style="padding:10px 20px 10px 40px;">
-			<p>站点名称: <input type="text"></p>
-			<p>站点地址: <input type="password"></p>
+	<div id="win" class="easyui-window" closed="true"  modal="true" title="新建" style="width:350px;height:220px;">
+		<form id="siteForm" style="padding:10px 20px 10px 40px;">
+			<p>站点名称: <input class="easyui-textbox" type="text" name=""></p>
+			<p>站点地址: <input class="easyui-textbox" type="text" name=""></p>
+			<p>站点地址: <input  class="easyui-combobox" textField="text" url="" type="text" name=""></p>
 			<div style="padding:5px;text-align:center;">
-				<a href="#" class="easyui-linkbutton" icon="icon-ok">确定</a>
-				<!-- <a href="#" class="easyui-linkbutton" icon="icon-cancel">Cancel</a> -->
+				<a href="#" id="siteConfirm" class="easyui-linkbutton" icon="icon-ok">确定</a>
+				<a href="#" id="siteCancel" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
 			</div>
 		</form>
 	</div> 
@@ -70,15 +71,17 @@
 
 <script type="text/javascript">
 	
+	// 新建窗口打开
 	$('#siteAdd').click(function(){
 		$('#win').window('open');
 	});
 	
+	// 删除站点
 	$('#siteDel').click(function(){
 		
 		$.messager.confirm('确认','确认删除吗',function(flag){    
 		    if (flag){    
-		    	//
+		    	
 		    	// 获取选中行的 id
 				var rows = $('#dg').datagrid('getSelections');
 				var ids = "";
@@ -89,26 +92,47 @@
 						ids += rows[i].id + ",";
 					}
 				}
-				
+				// 删除 选中的 
 				$.ajax({
-					type:"GET",
+					type:"POST",
 					url:"/site/delSite.html",
 					data:"ids="+ids,
 					dataType:"JSON",
 					success:function(data){
 						if(data.success==true){
-							//$.messager.alert('消息',data.msg); 
-							alert(data.msg);
+							$.messager.show({title:'消息',msg:data.msg,timeout:5000,showType:'slide'})
 							$('#dg').datagrid("reload");
 						}else{
 							$.messager.alert('消息',data.msg); 
 						}
+					},
+					error:function(data){
+						console.log(2);
 					}
 				})
 		    }    
 		}); 
 		
 	});
+	
+	// form 表单提交
+	$('#siteForm').form({
+		url:'',
+		onSubmit:function(){
+			
+		},
+		success:function(){
+			alert(data);
+		}
+	})
+	
+	$('#siteConfirm').click(function(){
+		$('#siteForm').submit();
+	})
+	
+	$('#siteCancel').click(function(){
+		$('#win').window('close');
+	})
 	
 	
 	$(function(){

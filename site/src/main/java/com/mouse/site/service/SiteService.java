@@ -11,4 +11,6 @@ public interface SiteService {
 	
 	public Integer delSite(String id);
 	
+	public Integer addSite(Site site);
+	
 }
