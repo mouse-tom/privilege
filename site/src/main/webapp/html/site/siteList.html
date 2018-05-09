@@ -32,7 +32,7 @@
 	
 	<table class="easyui-datagrid" id="dg" title="站点列表" 
 		toolbar="#toolbar" idField="id"
-		rownumbers="true" fitColumns="true" singleSelect="false" url="/site/index.html" pagination="true" singleSelect="true">
+		rownumbers="true" fitColumns="true" singleSelect="false" url="/site/listSite.html" pagination="true" singleSelect="true">
 		<thead>
 			<tr>
 				<th field="ck" checkbox="true" width="50" ></th>
@@ -117,11 +117,11 @@
 	
 	// form 表单提交
 	$('#siteForm').form({
-		url:'',
+		url:'/site/addSite.html',
 		onSubmit:function(){
 			
 		},
-		success:function(){
+		success:function(data){
 			alert(data);
 		}
 	})
