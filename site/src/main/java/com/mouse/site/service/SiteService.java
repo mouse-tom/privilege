@@ -13,4 +13,8 @@ public interface SiteService {
 	
 	public Integer addSite(Site site);
 	
+	public Integer updateEnableSite(String id,String enable);
+	
+	public List<Site> reviewSiteList();
+	
 }

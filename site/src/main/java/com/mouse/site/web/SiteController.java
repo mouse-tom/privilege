@@ -1,5 +1,6 @@
 package com.mouse.site.web;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -61,11 +62,37 @@ public class SiteController {
 	public String siteAdd(Site site){
 		Map hashMap = new HashMap<>();
 		site.setCreatTime(new Date());
-	
 		Integer flag = siteService.addSite(site);
 		if(flag == 1) hashMap.put("msg", "添加成功");
 		else hashMap.put("msg", "添加失败");
 		return JsonUtils.toJSONString(hashMap);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateSiteEnableStatus.html")
+	public String updateSite(String id){
+		Map hashMap = new HashMap<>();
+		if(id !=null && !"".equals(id)){
+			hashMap.put("msg", "请至少选择一条更新");
+		}else{
+			Integer flag = siteService.updateEnableSite(id, "Y");
+			if(flag == 1) hashMap.put("msg", "更新成功");
+			else hashMap.put("msg", "更新失败");
+		}
+		return JsonUtils.toJSONString(hashMap);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reviewSiteList.html")
+	public String reviewSiteList(Integer page,Integer rows,HttpServletResponse response){
+		page = page==null?1:page;
+		rows = rows==null?10:rows;
+		Map hashMap = new HashMap<>();
+		hashMap.put("page", page);
+		hashMap.put("rows", rows);
+		List<Site> list = siteService.reviewSiteList();
+		return JsonUtils.toJSONString(list);
+	}
+	
 	
 }

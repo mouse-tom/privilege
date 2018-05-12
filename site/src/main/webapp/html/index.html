@@ -20,17 +20,17 @@
     <div data-options="region:'west',title:'菜单',split:true" style="width:180px;">
     	<ul id="menu" class="easyui-tree" style="margin-top: 10px;margin-left: 5px;">
          	<li>
-         		<span>商品管理</span>
+         		<span>站点管理</span>
          		<ul>
-	         		<li data-options="attributes:{'url':'site/siteList.html'}">新增商品</li>
-	         		
+         			
+	         		<li data-options="attributes:{'url':'site/siteList.html'}">站点列表</li>
+	         		<li data-options="attributes:{'url':'site/reviewSiteList.html'}">审核列表</li>
 	         	</ul>
          	</li>
          	<li>
          		<span>网站内容管理</span>
          		<ul>
 	         		<li data-options="attributes:{'url':'content-category'}">内容分类管理</li>
-	         		
 	         	</ul>
          	</li>
          	<li>
@@ -60,7 +60,6 @@ $(function(){
 			if($('#menu').tree("isLeaf",node.target)){
 				var tabs = $("#tabs");
 				var tab = tabs.tabs("getTab",node.text);
-				var content = '<iframe  frameborder="0"  src="'+"http://www.baidu.com"+'" style="width:100%;height:100%;display:block;"></iframe>';
 
 				if(tab){
 					tabs.tabs("select",node.text);

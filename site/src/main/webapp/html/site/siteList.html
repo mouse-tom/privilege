@@ -50,17 +50,18 @@
 	
 	<div id="toolbar">
 		<a href="#" id="siteAdd" class="easyui-linkbutton" iconCls="icon-add" plain="true" >新建</a>
-		<a href="#" id="siteDel" class="easyui-linkbutton" iconCls="icon-remove" plain="true" ">删除</a>
+		<a href="#" id="siteDel" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 		<!-- <a href="#" id="" class="easyui-linkbutton" iconCls="icon-save" plain="true" ">保存</a> -->
 		<!-- <a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancel</a> -->
 	</div>
 	
 	
 	<div id="win" class="easyui-window" closed="true"  modal="true" title="新建" style="width:350px;height:220px;">
-		<form id="siteForm" style="padding:10px 20px 10px 40px;">
-			<p>站点名称: <input class="easyui-textbox" type="text" name=""></p>
-			<p>站点地址: <input class="easyui-textbox" type="text" name=""></p>
-			<p>站点地址: <input  class="easyui-combobox" textField="text" url="" type="text" name=""></p>
+		<form id="siteForm" method="post" style="padding:10px 20px 10px 40px;">
+			<p>站点名称: <input class="easyui-textbox" type="text" name="siteName"></p>
+			<p>站点地址: <input class="easyui-textbox" type="text" name="siteUrl"></p>
+			<p>站点icon: <input class="easyui-filebox" style="width:300px"></p>
+			<p>站点类别: <input  class="easyui-combobox" textField="text" url="" type="text" name=""></p>
 			<div style="padding:5px;text-align:center;">
 				<a href="#" id="siteConfirm" class="easyui-linkbutton" icon="icon-ok">确定</a>
 				<a href="#" id="siteCancel" class="easyui-linkbutton" icon="icon-cancel">Cancel</a>
@@ -107,7 +108,7 @@
 						}
 					},
 					error:function(data){
-						console.log(2);
+						$.messager.alert('消息',data.msg);
 					}
 				})
 		    }    
@@ -122,7 +123,9 @@
 			
 		},
 		success:function(data){
-			alert(data);
+			$('#win').window('close');
+			$('#siteForm').form('clear');
+			$('#dg').datagrid('reload');
 		}
 	})
 	
@@ -133,6 +136,15 @@
 	$('#siteCancel').click(function(){
 		$('#win').window('close');
 	})
+	
+	$('#dg').datagrid({
+	onDblClickCell: function(index,field,value){
+			$(this).datagrid('beginEdit', index);
+			console.log(index+'--'+field)
+			var ed = $(this).datagrid('getEditor', {index:index,field:field});
+			$(ed.target).focus();
+		}
+	});
 	
 	
 	$(function(){

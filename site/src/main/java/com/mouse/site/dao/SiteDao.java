@@ -3,6 +3,8 @@ package com.mouse.site.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.mouse.site.pojo.Site;
 
 public interface SiteDao {
@@ -20,5 +22,10 @@ public interface SiteDao {
     
     List<Site> siteList(Map hashMap);
     
+    int siteDel(String id);
     
+    int updateEnableSite(@Param("id")String id,@Param("enable")String enable);
+    
+    List<Site> reviewSiteList();
+
 }

@@ -2,12 +2,20 @@ package com.mouse.site.pojo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class Site {
     private String id;
 
     private String siteCode;
 
     private String siteName;
+
+    private String iconUrl;
+
+    private Integer siteType;
 
     private String siteUrl;
 
@@ -17,16 +25,20 @@ public class Site {
 
     private Integer siteStatus;
 
+    private Integer enableStatus;
+
     private Integer status;
 
     private String remarks;
 
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")  
     private Date creatTime;
 
     private String creatUser;
 
     private String modifier;
-
+    
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss") 
     private Date modifyTime;
 
     public String getId() {
@@ -51,6 +63,22 @@ public class Site {
 
     public void setSiteName(String siteName) {
         this.siteName = siteName == null ? null : siteName.trim();
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl == null ? null : iconUrl.trim();
+    }
+
+    public Integer getSiteType() {
+        return siteType;
+    }
+
+    public void setSiteType(Integer siteType) {
+        this.siteType = siteType;
     }
 
     public String getSiteUrl() {
@@ -78,22 +106,30 @@ public class Site {
     }
 
     public Integer getSiteStatus() {
-		return siteStatus;
-	}
+        return siteStatus;
+    }
 
-	public void setSiteStatus(Integer siteStatus) {
-		this.siteStatus = siteStatus;
-	}
+    public void setSiteStatus(Integer siteStatus) {
+        this.siteStatus = siteStatus;
+    }
 
-	public Integer getStatus() {
-		return status;
-	}
+    public Integer getEnableStatus() {
+        return enableStatus;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public void setEnableStatus(Integer enableStatus) {
+        this.enableStatus = enableStatus;
+    }
 
-	public String getRemarks() {
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getRemarks() {
         return remarks;
     }
 
@@ -132,4 +168,14 @@ public class Site {
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+	@Override
+	public String toString() {
+		return "Site [id=" + id + ", siteCode=" + siteCode + ", siteName=" + siteName + ", iconUrl=" + iconUrl
+				+ ", siteType=" + siteType + ", siteUrl=" + siteUrl + ", classId=" + classId + ", className="
+				+ className + ", siteStatus=" + siteStatus + ", enableStatus=" + enableStatus + ", status=" + status
+				+ ", remarks=" + remarks + ", creatTime=" + creatTime + ", creatUser=" + creatUser + ", modifier="
+				+ modifier + ", modifyTime=" + modifyTime + "]";
+	}
+    
 }
