@@ -310,3 +310,5 @@ CREATE TABLE phone_message (
  user_id mediumint(8) NOT NULL COMMENT '用户ID',
  PRIMARY KEY (phone_id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+
+## 修改 文件
