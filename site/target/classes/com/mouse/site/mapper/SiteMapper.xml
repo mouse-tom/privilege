@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mouse.site.dao.SiteDao" >
+ <resultMap id="BaseResultMap" type="com.mouse.site.pojo.Site" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="site_code" property="siteCode" jdbcType="VARCHAR" />
+    <result column="site_name" property="siteName" jdbcType="VARCHAR" />
+    <result column="icon_url" property="iconUrl" jdbcType="VARCHAR" />
+    <result column="site_type" property="siteType" jdbcType="INTEGER" />
+    <result column="site_url" property="siteUrl" jdbcType="VARCHAR" />
+    <result column="class_id" property="classId" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="site_status" property="siteStatus" jdbcType="INTEGER" />
+    <result column="enable_status" property="enableStatus" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="creat_time" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="creat_user" property="creatUser" jdbcType="VARCHAR" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, site_code, site_name, icon_url, site_type, site_url, class_id, class_name, site_status, 
+    enable_status, status, remarks, creat_time, creat_user, modifier, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from site
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from site
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mouse.site.pojo.Site" >
+    insert into site (id, site_code, site_name, 
+      icon_url, site_type, site_url, 
+      class_id, class_name, site_status, 
+      enable_status, status, remarks, 
+      creat_time, creat_user, modifier, 
+      modify_time)
+    values (#{id,jdbcType=VARCHAR}, #{siteCode,jdbcType=VARCHAR}, #{siteName,jdbcType=VARCHAR}, 
+      #{iconUrl,jdbcType=VARCHAR}, #{siteType,jdbcType=INTEGER}, #{siteUrl,jdbcType=VARCHAR}, 
+      #{classId,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{siteStatus,jdbcType=INTEGER}, 
+      #{enableStatus,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{remarks,jdbcType=VARCHAR}, 
+      #{creatTime,jdbcType=TIMESTAMP}, #{creatUser,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mouse.site.pojo.Site" >
+    insert into site
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="siteCode != null" >
+        site_code,
+      </if>
+      <if test="siteName != null" >
+        site_name,
+      </if>
+      <if test="iconUrl != null" >
+        icon_url,
+      </if>
+      <if test="siteType != null" >
+        site_type,
+      </if>
+      <if test="siteUrl != null" >
+        site_url,
+      </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="siteStatus != null" >
+        site_status,
+      </if>
+      <if test="enableStatus != null" >
+        enable_status,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="creatUser != null" >
+        creat_user,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="siteCode != null" >
+        #{siteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="siteName != null" >
+        #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="siteType != null" >
+        #{siteType,jdbcType=INTEGER},
+      </if>
+      <if test="siteUrl != null" >
+        #{siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="siteStatus != null" >
+        #{siteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null" >
+        #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatUser != null" >
+        #{creatUser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mouse.site.pojo.Site" >
+    update site
+    <set >
+      <if test="siteCode != null" >
+        site_code = #{siteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="siteName != null" >
+        site_name = #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="iconUrl != null" >
+        icon_url = #{iconUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="siteType != null" >
+        site_type = #{siteType,jdbcType=INTEGER},
+      </if>
+      <if test="siteUrl != null" >
+        site_url = #{siteUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="siteStatus != null" >
+        site_status = #{siteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enableStatus != null" >
+        enable_status = #{enableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creatUser != null" >
+        creat_user = #{creatUser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mouse.site.pojo.Site" >
+    update site
+    set site_code = #{siteCode,jdbcType=VARCHAR},
+      site_name = #{siteName,jdbcType=VARCHAR},
+      icon_url = #{iconUrl,jdbcType=VARCHAR},
+      site_type = #{siteType,jdbcType=INTEGER},
+      site_url = #{siteUrl,jdbcType=VARCHAR},
+      class_id = #{classId,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
+      site_status = #{siteStatus,jdbcType=INTEGER},
+      enable_status = #{enableStatus,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      creat_user = #{creatUser,jdbcType=VARCHAR},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+ 
+  <!-- 可用站点列表 -->
+  <select id="siteList" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		select  <include refid="Base_Column_List" /> from site s
+  		<where>
+  			and s.status = 0
+  			and s.enable_status = 0
+  			and s.site_status = 0 
+  		</where> 
+  </select>
+  
+  <!-- 未启用站点列表 -->
+  <select id="enableSiteList" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List" /> from site s
+  		<where>
+  			and s.status = 0
+  			and s.enable_status = 1
+  		</where>
+  </select>
+  
+  
+  <update id="updateEnableSite"   parameterType="java.lang.String" >
+  	UPDATE site  
+  	<if test="enable == 'Y'">
+  		set enable_status = 0
+  	</if>
+  	<if test="enable == 'N'">
+  		set enable_status = 1  
+  	</if>
+  	where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  
+  <!-- 逻辑删除   -->
+  <update id="siteDel" parameterType="java.lang.String" >
+  	 	update site set status = 1 where id = #{id} 
+  </update>
+  
+  <!-- 站点审核列表 -->
+  <select id="reviewSiteList" parameterType="java.lang.String" resultMap="BaseResultMap">
+  		SELECT <include refid="Base_Column_List" /> from site s  
+  		<where>
+  			s.`status` = 0 and site_status in(1,2)
+  		</where>
+  </select>
+  
+</mapper>
